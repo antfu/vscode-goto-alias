@@ -1,6 +1,6 @@
 {
   "name": "goto-alias",
-  "displayName": "Goto Definition with Alias",
+  "displayName": "Go to Definition following alias redirections",
   "version": "0.0.0",
   "publisher": "antfu",
   "packageManager": "pnpm@7.0.1",
