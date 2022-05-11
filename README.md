@@ -1,8 +1,20 @@
-# vscode-goto-alias
+<p align="center">
+<img src="./res/icon.png" height="180">
+</p>
 
-<a href="https://marketplace.visualstudio.com/items?itemName=antfu.vscode-goto-alias" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/antfu.vscode-goto-alias.svg?color=eee&amp;label=VS%20Code%20Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
+<h1 align="center">
+vscode-goto-alias
+</h1>
 
+<p align="center">
 Go to Definition following alias redirections.
+</p>
+
+<p align="center">
+<a href="https://marketplace.visualstudio.com/items?itemName=antfu.goto-alias" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/antfu.goto-alias.svg?color=eee&amp;label=VS%20Code%20Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
+</p>
+
+<br>
 
 ## Motivation
 
