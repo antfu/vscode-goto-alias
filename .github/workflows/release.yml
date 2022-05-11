@@ -13,11 +13,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set node version to v16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-
       - run: npx conventional-github-releaser -p angular
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}
