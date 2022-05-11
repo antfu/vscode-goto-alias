@@ -1,10 +1,10 @@
 {
   "name": "goto-alias",
-  "displayName": "Go to Definition following alias redirections",
+  "displayName": "Goto definition alias",
   "version": "0.0.2",
   "publisher": "antfu",
   "packageManager": "pnpm@7.0.1",
-  "description": "Goto the source definition for aliased types",
+  "description": "Go to definition following alias redirections",
   "homepage": "https://github.com/antfu/vscode-goto-alias#readme",
   "bugs": {
     "url": "https://github.com/antfu/vscode-goto-alias/issues"
