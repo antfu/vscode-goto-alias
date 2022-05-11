@@ -1,7 +1,7 @@
 {
   "name": "goto-alias",
   "displayName": "Go to Definition following alias redirections",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "antfu",
   "packageManager": "pnpm@7.0.1",
   "description": "Goto the source definition for aliased types",
