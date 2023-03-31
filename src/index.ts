@@ -2,7 +2,7 @@ import type { TextDocument } from 'vscode'
 import { Position, Selection, commands, languages, window } from 'vscode'
 
 // TODO: config
-const CLOSE_DTS_TAB = false
+const CLOSE_DTS_TAB = true
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
