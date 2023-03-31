@@ -40,7 +40,13 @@ export function activate() {
         return
 
       // wait for e.selection to update (init 0)
-      await Promise.resolve()
+      const waitInterval = 5
+      const maxWait = 1000
+      for (let i = 0; i < maxWait; i += waitInterval) {
+        await new Promise(resolve => setTimeout(resolve, waitInterval))
+        if (e.selection.anchor.line !== 0)
+          break
+      }
 
       const line = e.document.lineAt(e.selection.anchor.line)
       const text = line.text
