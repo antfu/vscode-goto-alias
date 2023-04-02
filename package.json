@@ -1,7 +1,7 @@
 {
   "name": "goto-alias",
   "displayName": "Goto definition alias",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "antfu",
   "packageManager": "pnpm@7.0.1",
   "description": "Go to definition following alias redirections",
