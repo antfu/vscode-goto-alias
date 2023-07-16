@@ -1,12 +1,12 @@
 import type { TextDocument } from 'vscode'
 import { Position, Selection, commands, languages, window } from 'vscode'
-
-// TODO: config
-const CLOSE_DTS_TAB = false
+import { config } from './utils'
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
   let lastDoc: TextDocument | undefined
+
+  const CLOSE_DTS_TAB = config().get<boolean>('closeDTS', true)
 
   languages.registerDefinitionProvider([
     'javascript',
@@ -68,6 +68,7 @@ export function activate() {
       )
       const tab = window.tabGroups.activeTabGroup.activeTab
       triggerDoc = undefined
+
       await commands.executeCommand('editor.action.goToDeclaration')
       if (CLOSE_DTS_TAB && tab && tab !== window.tabGroups.activeTabGroup.activeTab)
         await window.tabGroups.close(tab)
@@ -83,6 +84,4 @@ export function activate() {
   }, 100)
 }
 
-export function deactivate() {
-
-}
+export function deactivate() {}

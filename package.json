@@ -34,6 +34,19 @@
     "onLanguage:typescript",
     "onLanguage:typescriptreact"
   ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "GOTO Alias",
+      "properties": {
+        "gotoAlias.closeDTS": {
+          "type": "boolean",
+          "default": true,
+          "description": "Close the .d.ts file after jumping to the definition"
+        }
+      }
+    }
+  },
   "icon": "res/icon.png",
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
