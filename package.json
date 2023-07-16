@@ -41,7 +41,7 @@
       "properties": {
         "gotoAlias.closeDTS": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Close the .d.ts file after jumping to the definition"
         }
       }

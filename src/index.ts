@@ -6,7 +6,7 @@ export function activate() {
   let triggerDoc: TextDocument | undefined
   let lastDoc: TextDocument | undefined
 
-  const CLOSE_DTS_TAB = config().get<boolean>('closeDTS', true)
+  const CLOSE_DTS_TAB = config().get<boolean>('closeDTS', false)
 
   languages.registerDefinitionProvider([
     'javascript',
