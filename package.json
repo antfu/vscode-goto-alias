@@ -1,32 +1,33 @@
 {
+  "publisher": "antfu",
   "name": "goto-alias",
   "displayName": "Goto definition alias",
   "version": "0.1.1",
-  "publisher": "antfu",
-  "packageManager": "pnpm@7.0.1",
+  "packageManager": "pnpm@8.6.8",
   "description": "Go to definition following alias redirections",
-  "homepage": "https://github.com/antfu/vscode-goto-alias#readme",
-  "bugs": {
-    "url": "https://github.com/antfu/vscode-goto-alias/issues"
-  },
-  "license": "MIT",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/antfu",
+  "homepage": "https://github.com/antfu/vscode-goto-alias#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/antfu/vscode-goto-alias"
   },
-  "funding": "https://github.com/sponsors/antfu",
-  "main": "./dist/index.js",
-  "files": [
-    "dist"
-  ],
-  "sideEffects": false,
-  "engines": {
-    "vscode": "^1.67.0"
+  "bugs": {
+    "url": "https://github.com/antfu/vscode-goto-alias/issues"
   },
   "categories": [
     "Other"
   ],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "vscode": "^1.67.0"
+  },
   "activationEvents": [
     "onLanguage:vue",
     "onLanguage:javascript",
@@ -47,7 +48,6 @@
       }
     }
   },
-  "icon": "res/icon.png",
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
@@ -60,20 +60,20 @@
     "release": "bumpp --commit --push --tag && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.23.0",
-    "@antfu/ni": "^0.16.2",
-    "@babel/types": "^7.17.10",
-    "@types/node": "^17.0.32",
-    "@types/vscode": "^1.67.0",
-    "bumpp": "^7.1.1",
-    "eslint": "^8.15.0",
-    "esno": "^0.14.1",
-    "pnpm": "^7.0.1",
-    "rimraf": "^3.0.2",
-    "tsup": "^5.12.1",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.8",
-    "vitest": "^0.12.4",
-    "vsce": "^2.7.0"
+    "@antfu/eslint-config": "^0.39.8",
+    "@antfu/ni": "^0.21.5",
+    "@babel/types": "^7.22.5",
+    "@types/node": "^20.4.2",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^2.19.0",
+    "bumpp": "^9.1.1",
+    "eslint": "^8.45.0",
+    "esno": "^0.17.0",
+    "pnpm": "^8.6.8",
+    "rimraf": "^5.0.1",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.4",
+    "vitest": "^0.33.0"
   }
 }
