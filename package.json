@@ -26,7 +26,7 @@
     "dist"
   ],
   "engines": {
-    "vscode": "^1.67.0"
+    "vscode": "^1.80.0"
   },
   "activationEvents": [
     "onLanguage:vue",
@@ -35,6 +35,19 @@
     "onLanguage:typescript",
     "onLanguage:typescriptreact"
   ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Goto Alias",
+      "properties": {
+        "gotoAlias.closeDts": {
+          "type": "boolean",
+          "default": false,
+          "description": "Close the .d.ts file after jumping to the definition"
+        }
+      }
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",

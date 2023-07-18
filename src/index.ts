@@ -1,8 +1,7 @@
 import type { TextDocument } from 'vscode'
-import { Position, Selection, commands, languages, window } from 'vscode'
+import { Position, Selection, commands, languages, window, workspace } from 'vscode'
 
-// TODO: config
-const CLOSE_DTS_TAB = false
+const extName = 'gotoAlias'
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
@@ -68,8 +67,9 @@ export function activate() {
       )
       const tab = window.tabGroups.activeTabGroup.activeTab
       triggerDoc = undefined
+
       await commands.executeCommand('editor.action.goToDeclaration')
-      if (CLOSE_DTS_TAB && tab && tab !== window.tabGroups.activeTabGroup.activeTab)
+      if (workspace.getConfiguration(`${extName}.closeDts`) && tab && tab !== window.tabGroups.activeTabGroup.activeTab)
         await window.tabGroups.close(tab)
     }
 
@@ -83,6 +83,4 @@ export function activate() {
   }, 100)
 }
 
-export function deactivate() {
-
-}
+export function deactivate() {}
