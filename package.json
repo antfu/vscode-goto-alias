@@ -2,7 +2,7 @@
   "publisher": "antfu",
   "name": "goto-alias",
   "displayName": "Goto definition alias",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "packageManager": "pnpm@8.6.8",
   "description": "Go to definition following alias redirections",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
