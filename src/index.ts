@@ -1,12 +1,11 @@
 import type { TextDocument } from 'vscode'
-import { Position, Selection, commands, languages, window } from 'vscode'
-import { config } from './utils'
+import { Position, Selection, commands, languages, window, workspace } from 'vscode'
+
+const extName = 'gotoAlias'
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
   let lastDoc: TextDocument | undefined
-
-  const CLOSE_DTS_TAB = config().get<boolean>('closeDTS', false)
 
   languages.registerDefinitionProvider([
     'javascript',
@@ -70,7 +69,7 @@ export function activate() {
       triggerDoc = undefined
 
       await commands.executeCommand('editor.action.goToDeclaration')
-      if (CLOSE_DTS_TAB && tab && tab !== window.tabGroups.activeTabGroup.activeTab)
+      if (workspace.getConfiguration(`${extName}.closeDts`) && tab && tab !== window.tabGroups.activeTabGroup.activeTab)
         await window.tabGroups.close(tab)
     }
 
