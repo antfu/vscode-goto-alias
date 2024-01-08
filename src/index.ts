@@ -50,7 +50,7 @@ export function activate() {
 
       const line = e.document.lineAt(e.selection.anchor.line)
       const text = line.text
-      const regex = /:\s+typeof import\('([^']*)'\)/
+      const regex = /:\s+typeof import\(['"`]([^']*)['"`]\)/
       const match = text.match(regex)
       if (!match)
         return
