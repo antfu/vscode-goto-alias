@@ -49,8 +49,8 @@
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --external vscode",
-    "dev": "nr build --watch",
+    "build": "cross-env NODE_ENV=production tsup src/index.ts --external vscode",
+    "dev": "cross-env NODE_ENV=dev nr build --watch",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
     "publish": "vsce publish --no-dependencies",
@@ -66,6 +66,7 @@
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^2.22.0",
     "bumpp": "^9.2.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "esno": "^4.0.0",
     "pnpm": "^8.14.0",
