@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
@@ -7,6 +8,7 @@ export default defineConfig({
   format: ['cjs'],
   shims: false,
   dts: false,
+  sourcemap: process.env.NODE_ENV === 'development',
   external: [
     'vscode',
   ],

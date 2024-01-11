@@ -83,10 +83,10 @@ export function activate() {
         await commands.executeCommand('editor.action.goToDeclaration')
       }
 
-      const tab = window.tabGroups.activeTabGroup.activeTab
+      const { activeTab } = window.tabGroups.activeTabGroup
       const isNeedCloseDts = workspace.getConfiguration(`${extName}`).get('closeDts')
-      if (isNeedCloseDts && tab && tab !== window.tabGroups.activeTabGroup.activeTab)
-        await window.tabGroups.close(tab)
+      if (isNeedCloseDts && activeTab?.label.endsWith('.d.ts'))
+        await window.tabGroups.close(activeTab)
     }
 
     await fn()
