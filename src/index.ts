@@ -50,7 +50,7 @@ export function activate() {
 
       const line = e.document.lineAt(e.selection.anchor.line)
       const text = line.text
-      const regex = /:\s+typeof import\(['"`]([^']*)['"`]\)/
+      const regex = /:\s+typeof import\(\s*['"]([^'"]+)['"]\)\s*\['([^']+)'\]/
       const match = text.match(regex)
       if (!match)
         return
@@ -68,7 +68,7 @@ export function activate() {
       // 2. And we use VSCode built-in "Go to definition" command trigger any
       //    other condition's jump
       else {
-        const importNameStart = match.index! + match[0].length - match[1].length - 1
+        const importNameStart = match.index! + match[0].length - match[2].length - 1
         e.selection = new Selection(
           new Position(
             e.selection.anchor.line,
@@ -76,7 +76,7 @@ export function activate() {
           ),
           new Position(
             e.selection.anchor.line,
-            importNameStart + match[1].length,
+            importNameStart + match[2].length,
           ),
         )
         triggerDoc = undefined
@@ -100,3 +100,4 @@ export function activate() {
 }
 
 export function deactivate() {}
+
