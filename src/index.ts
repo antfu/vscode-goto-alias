@@ -32,7 +32,7 @@ export function activate() {
             // get the content of the dts file without opening it
             const dtsDocument = (await workspace.fs.readFile(targetUri)).toString()
             const { targetRange } = definition
-            const regex = /:\s+typeof import\(['"`]([^']*)['"`]\)\[['"`]([^']*)['"`]\]/
+            const regex = /\s*typeof import\(['"`]([^']*)['"`]\)\[['"`]([^']*)['"`]\]/
             const line = dtsDocument.split('\n')[targetRange.start.line]
             const match = line.match(regex)
 
