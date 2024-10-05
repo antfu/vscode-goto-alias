@@ -1,5 +1,5 @@
 import type { Definition, DefinitionLink, Location, LocationLink, TextDocument } from 'vscode'
-import { commands, languages, Position, workspace } from 'vscode'
+import { Position, commands, languages, workspace } from 'vscode'
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
@@ -41,12 +41,17 @@ export function activate() {
               continue
             }
 
-            const importNameStart = match.index! + match[0].length - match[2].length - 1
+            const importNameStart = match.index! + match[0].length - 2
             const dtsDefinitions = await commands.executeCommand('vscode.executeDefinitionProvider', targetUri, new Position(targetRange.start.line, importNameStart)) as DefinitionLink[]
             if (dtsDefinitions.length) {
               // unshift to keep this definition as primary
               // when set `"editor.gotoLocation.multipleDefinitions": "goto"`, it will go to the right file
-              modifiedDefinitions.unshift(...dtsDefinitions.map(dtsDefinition => ({ ...dtsDefinition, originSelectionRange })))
+              modifiedDefinitions.unshift(
+                ...dtsDefinitions.map(dtsDefinition => ({
+                  ...dtsDefinition,
+                  originSelectionRange,
+                })),
+              )
             }
           }
         }
