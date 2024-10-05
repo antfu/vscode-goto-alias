@@ -68,7 +68,7 @@ export function activate() {
       // 2. And we use VSCode built-in "Go to definition" command trigger any
       //    other condition's jump
       else {
-        const importNameStart = match.index! + match[0].length - match[1].length - 1
+        const importNameStart = match.index! + match[0].length + 2
         e.selection = new Selection(
           new Position(
             e.selection.anchor.line,
@@ -76,7 +76,7 @@ export function activate() {
           ),
           new Position(
             e.selection.anchor.line,
-            importNameStart + match[1].length,
+            importNameStart,
           ),
         )
         triggerDoc = undefined
