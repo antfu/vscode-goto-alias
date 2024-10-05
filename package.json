@@ -2,8 +2,8 @@
   "publisher": "antfu",
   "name": "goto-alias",
   "displayName": "Goto definition alias",
-  "version": "0.1.6",
-  "packageManager": "pnpm@9.6.0",
+  "version": "0.1.7",
+  "packageManager": "pnpm@9.11.0",
   "description": "Go to definition following alias redirections",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "dist"
   ],
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.94.0"
   },
   "activationEvents": [
     "onLanguage:vue",
@@ -52,18 +52,18 @@
     "release": "bumpp --commit --push --tag && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.23.2",
-    "@antfu/ni": "^0.22.0",
-    "@babel/types": "^7.24.9",
-    "@types/node": "^20.14.11",
-    "@types/vscode": "^1.91.0",
-    "@vscode/vsce": "^2.31.1",
-    "bumpp": "^9.4.1",
-    "eslint": "^9.7.0",
-    "esno": "^4.7.0",
-    "pnpm": "^9.6.0",
-    "tsup": "^8.2.2",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.4"
+    "@antfu/eslint-config": "^3.7.3",
+    "@antfu/ni": "^0.23.0",
+    "@babel/types": "^7.25.7",
+    "@types/node": "^22.7.4",
+    "@types/vscode": "^1.94.0",
+    "@vscode/vsce": "^3.1.1",
+    "bumpp": "^9.6.1",
+    "eslint": "^9.12.0",
+    "esno": "^4.8.0",
+    "pnpm": "^9.12.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
   }
 }
