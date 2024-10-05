@@ -1,6 +1,6 @@
-import { dirname, join } from 'node:path'
 import type { TextDocument } from 'vscode'
-import { Position, Selection, Uri, commands, languages, window, workspace } from 'vscode'
+import { dirname, join } from 'node:path'
+import { commands, languages, Position, Selection, Uri, window, workspace } from 'vscode'
 
 const extName = 'gotoAlias'
 
