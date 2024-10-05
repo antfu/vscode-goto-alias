@@ -1,5 +1,5 @@
 import type { Definition, DefinitionLink, Location, LocationLink, TextDocument } from 'vscode'
-import { Position, commands, languages, workspace } from 'vscode'
+import { commands, languages, Position, workspace } from 'vscode'
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
