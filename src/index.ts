@@ -1,9 +1,20 @@
 import type { Definition, DefinitionLink, Location, LocationLink, TextDocument } from 'vscode'
-import { Position, commands, languages, workspace } from 'vscode'
+import { commands, languages, Position, window, workspace } from 'vscode'
 
 export function activate() {
   let triggerDoc: TextDocument | undefined
   let triggerPos: Position | undefined
+
+  window.showWarningMessage(
+    'For the first time, we recommend you to set `"editor.gotoLocation.multipleDefinitions": "goto"` in your settings,'
+    + 'which will jump to the first definition instead of showing multiple definitions.'
+    + 'Click "OK" to set it now automatically, or "Not now" to set it later.',
+    'OK',
+    'Not now',
+  ).then((selection) => {
+    if (selection === 'OK')
+      workspace.getConfiguration().update('editor.gotoLocation.multipleDefinitions', 'goto', true)
+  })
 
   languages.registerDefinitionProvider([
     'javascript',
