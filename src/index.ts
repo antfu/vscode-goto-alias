@@ -52,12 +52,17 @@ export function activate() {
               continue
             }
 
-            const importNameStart = match.index! + match[0].length - match[2].length - 1
+            const importNameStart = match.index! + match[0].length - 2
             const dtsDefinitions = await commands.executeCommand('vscode.executeDefinitionProvider', targetUri, new Position(targetRange.start.line, importNameStart)) as DefinitionLink[]
             if (dtsDefinitions.length) {
               // unshift to keep this definition as primary
               // when set `"editor.gotoLocation.multipleDefinitions": "goto"`, it will go to the right file
-              modifiedDefinitions.unshift(...dtsDefinitions.map(dtsDefinition => ({ ...dtsDefinition, originSelectionRange })))
+              modifiedDefinitions.unshift(
+                ...dtsDefinitions.map(dtsDefinition => ({
+                  ...dtsDefinition,
+                  originSelectionRange,
+                })),
+              )
             }
           }
         }
