@@ -40,14 +40,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Goto Alias",
-      "properties": {
-        "gotoAlias.closeDts": {
-          "type": "boolean",
-          "default": false,
-          "description": "Close the .d.ts file after jumping to the definition"
-        }
-      }
+      "title": "Goto Alias"
     }
   },
   "scripts": {
