@@ -1,20 +1,35 @@
-import type { Definition, DefinitionLink, Location, LocationLink, TextDocument } from 'vscode'
+import type { Definition, DefinitionLink, ExtensionContext, Location, LocationLink, TextDocument } from 'vscode'
 import { commands, languages, Position, window, workspace } from 'vscode'
 
-export function activate() {
+function showSettingsUpdateDialog(ext: ExtensionContext) {
+  if (workspace.getConfiguration().get('editor.gotoLocation.multipleDefinitions') === 'goto')
+    return
+
+  if (ext.globalState.get('showedSettingsUpdateDialog'))
+    return
+
+  window.showInformationMessage(
+    [
+      '[Goto Alias]',
+      'To get the best experience, we recommend you to set',
+      '`"editor.gotoLocation.multipleDefinitions": "goto"` to the first definition automatically.',
+      'Click "OK" to set it now.',
+    ].join('\n'),
+    'OK',
+    'Not now',
+  )
+    .then((selection) => {
+      if (selection === 'OK')
+        workspace.getConfiguration().update('editor.gotoLocation.multipleDefinitions', 'goto', true)
+      ext.globalState.update('showedSettingsUpdateDialog', true)
+    })
+}
+
+export function activate(ext: ExtensionContext) {
   let triggerDoc: TextDocument | undefined
   let triggerPos: Position | undefined
 
-  window.showWarningMessage(
-    'For the first time, we recommend you to set `"editor.gotoLocation.multipleDefinitions": "goto"` in your settings,'
-    + 'which will jump to the first definition instead of showing multiple definitions.'
-    + 'Click "OK" to set it now automatically, or "Not now" to set it later.',
-    'OK',
-    'Not now',
-  ).then((selection) => {
-    if (selection === 'OK')
-      workspace.getConfiguration().update('editor.gotoLocation.multipleDefinitions', 'goto', true)
-  })
+  showSettingsUpdateDialog(ext)
 
   languages.registerDefinitionProvider([
     'javascript',
