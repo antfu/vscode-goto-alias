@@ -16,6 +16,18 @@ Go to Definition following alias redirections.
 
 <br>
 
+## Usages
+
+Install this extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=antfu.goto-alias).
+
+Set `editor.gotoLocation.multipleDefinitions` to `goto` in your VS Code settings for the best experience.
+
+```json
+{
+  "editor.gotoLocation.multipleDefinitions": "goto"
+}
+```
+
 ## Motivation
 
 For example, in [Nuxt 3](https://github.com/nuxt/framework) or [Vitesse](https://github.com/antfu/vitesse) projects, we provide auto import for APIs and components. To provide types for these auto imports, the tools will generate a `.d.ts` file to declare those APIs as "global" type.
