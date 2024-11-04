@@ -26,8 +26,7 @@ function showSettingsUpdateDialog(ext: ExtensionContext) {
 }
 
 export function activate(ext: ExtensionContext) {
-  let triggerDoc: TextDocument | undefined
-  let triggerPos: Position | undefined
+  let lock: boolean = false
 
   showSettingsUpdateDialog(ext)
 
@@ -40,12 +39,10 @@ export function activate(ext: ExtensionContext) {
   ], {
     async provideDefinition(document: TextDocument, position: Position) {
       // prevent infinite loop and reduce unnecessary calls
-      if ((triggerDoc === document && triggerPos?.isEqual(position)))
+      if (lock)
         return null
 
-      triggerDoc = document
-      triggerPos = position
-
+      lock = true
       const definitions = await commands.executeCommand('vscode.executeDefinitionProvider', document.uri, position) as Definition | DefinitionLink[]
       if (!Array.isArray(definitions))
         return definitions
@@ -86,6 +83,7 @@ export function activate(ext: ExtensionContext) {
         }
       }
 
+      lock = false
       return modifiedDefinitions as Location[] | LocationLink[]
     },
   })
