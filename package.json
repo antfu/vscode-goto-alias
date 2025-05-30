@@ -3,7 +3,7 @@
   "name": "goto-alias",
   "displayName": "Goto definition alias",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "packageManager": "pnpm@10.11.0",
   "description": "Go to definition following alias redirections",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
