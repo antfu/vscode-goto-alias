@@ -2,6 +2,7 @@
   "publisher": "antfu",
   "name": "goto-alias",
   "displayName": "Goto definition alias",
+  "type": "module",
   "version": "0.2.1",
   "packageManager": "pnpm@9.12.3",
   "description": "Go to definition following alias redirections",
@@ -28,7 +29,7 @@
     "res"
   ],
   "engines": {
-    "vscode": "^1.93.0"
+    "vscode": "^1.100.0"
   },
   "activationEvents": [
     "onLanguage:vue",
@@ -44,7 +45,7 @@
     }
   },
   "scripts": {
-    "build": "NODE_ENV=production tsup src/index.ts --external vscode",
+    "build": "NODE_ENV=production tsdown src/index.ts --external vscode",
     "dev": "NODE_ENV=dev nr build --watch",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
@@ -64,7 +65,7 @@
     "eslint": "^9.14.0",
     "esno": "^4.8.0",
     "pnpm": "^9.12.3",
-    "tsup": "^8.3.5",
+    "tsdown": "^0.12.0",
     "typescript": "^5.6.3",
     "vite": "^5.4.10"
   }
