@@ -36,6 +36,7 @@ export function activate(ext: ExtensionContext) {
     'javascriptreact',
     'typescriptreact',
     'vue',
+    'markdown',
   ], {
     async provideDefinition(document: TextDocument, position: Position) {
       // prevent infinite loop and reduce unnecessary calls
