@@ -4,7 +4,7 @@
   "displayName": "Goto definition alias",
   "type": "module",
   "version": "0.3.0",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.13.1",
   "description": "Go to definition following alias redirections",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -56,18 +56,18 @@
     "release": "bumpp --commit --push --tag && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.2",
+    "@antfu/eslint-config": "^5.0.0",
     "@antfu/ni": "^25.0.0",
-    "@babel/types": "^7.27.3",
-    "@types/node": "^22.15.26",
+    "@babel/types": "^7.28.2",
+    "@types/node": "^24.1.0",
     "@types/vscode": "1.93.0",
-    "@vscode/vsce": "^3.4.2",
-    "bumpp": "^10.1.1",
-    "eslint": "^9.27.0",
+    "@vscode/vsce": "^3.6.0",
+    "bumpp": "^10.2.0",
+    "eslint": "^9.32.0",
     "esno": "^4.8.0",
-    "pnpm": "^10.11.0",
-    "tsdown": "^0.12.4",
+    "pnpm": "^10.13.1",
+    "tsdown": "^0.13.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^7.0.6"
   }
 }
