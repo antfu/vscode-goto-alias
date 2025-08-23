@@ -50,10 +50,10 @@
     "dev": "NODE_ENV=dev nr build --watch",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
-    "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies",
+    "ext:publish": "vsce publish --no-dependencies",
+    "package": "vsce package --no-dependencies",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp --commit --push --tag && nr publish"
+    "release": "bumpp --commit --push --tag"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.0.0",
@@ -65,9 +65,11 @@
     "bumpp": "^10.2.0",
     "eslint": "^9.32.0",
     "esno": "^4.8.0",
+    "ovsx": "^0.10.5",
     "pnpm": "^10.13.1",
     "tsdown": "^0.13.0",
     "typescript": "^5.8.3",
-    "vite": "^7.0.6"
+    "vite": "^7.0.6",
+    "vsxpub": "^0.1.0"
   }
 }

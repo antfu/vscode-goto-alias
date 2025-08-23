@@ -4,3 +4,6 @@ packages:
 onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
+  - '@vscode/vsce-sign'
+  - keytar
+  - vsxpub
