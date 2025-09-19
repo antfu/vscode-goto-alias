@@ -43,11 +43,17 @@
     "configuration": {
       "type": "object",
       "title": "Goto Alias"
-    }
+    },
+    "typescriptServerPlugins": [
+      {
+        "name": "goto-alias-typescript-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      }
+    ]
   },
   "scripts": {
-    "build": "NODE_ENV=production tsdown src/index.ts --external vscode",
-    "dev": "NODE_ENV=dev nr build --watch",
+    "build": "NODE_ENV=production tsdown",
+    "dev": "NODE_ENV=development tsdown --watch",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
     "ext:publish": "vsce publish --no-dependencies",
@@ -67,7 +73,7 @@
     "esno": "^4.8.0",
     "ovsx": "^0.10.5",
     "pnpm": "^10.15.0",
-    "tsdown": "^0.14.1",
+    "tsdown": "^0.15.2",
     "typescript": "^5.9.2",
     "vite": "^7.1.3",
     "vsxpub": "^0.1.0"
