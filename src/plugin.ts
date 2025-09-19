@@ -56,17 +56,29 @@ function getDefinitionAndBoundSpan(
       definition: ts.DefinitionInfo,
       sourceFile: ts.SourceFile,
     ) {
+      let pos: number | undefined
+
       if (ts.isBindingElement(node)) {
-        proxyBindingElement(node, definition, sourceFile)
+        pos = proxyBindingElement(node, definition, sourceFile)
       }
       if (ts.isPropertySignature(node) && node.type) {
-        proxyTypeofImport(node.name, node.type, definition, sourceFile)
+        pos = proxyTypeofImport(node.name, node.type, definition, sourceFile)
       }
       else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.type && !node.initializer) {
-        proxyTypeofImport(node.name, node.type, definition, sourceFile)
+        pos = proxyTypeofImport(node.name, node.type, definition, sourceFile)
       }
       else {
         ts.forEachChild(node, child => visit(child, definition, sourceFile))
+      }
+
+      if (pos !== undefined) {
+        const res = getDefinitionAndBoundSpan(definition.fileName, pos)
+        if (res?.definitions?.length) {
+          for (const definition of res.definitions) {
+            definitions.add(definition)
+          }
+          skippedDefinitions.push(definition)
+        }
       }
     }
 
@@ -80,7 +92,7 @@ function getDefinitionAndBoundSpan(
         return
       }
 
-      const { textSpan, fileName } = definition
+      const { textSpan } = definition
       const start = name.getStart(sourceFile)
       const end = name.getEnd()
 
@@ -88,14 +100,7 @@ function getDefinitionAndBoundSpan(
         return
       }
 
-      const pos = name.getStart(sourceFile)
-      const res = getDefinitionAndBoundSpan(fileName, pos)
-      if (res?.definitions?.length) {
-        for (const definition of res.definitions) {
-          definitions.add(definition)
-        }
-        skippedDefinitions.push(definition)
-      }
+      return name.getStart(sourceFile)
     }
 
     function proxyTypeofImport(
@@ -104,7 +109,7 @@ function getDefinitionAndBoundSpan(
       definition: ts.DefinitionInfo,
       sourceFile: ts.SourceFile,
     ) {
-      const { textSpan, fileName } = definition
+      const { textSpan } = definition
       const start = name.getStart(sourceFile)
       const end = name.getEnd()
 
@@ -112,23 +117,11 @@ function getDefinitionAndBoundSpan(
         return
       }
 
-      let pos: number | undefined
       if (ts.isIndexedAccessTypeNode(type)) {
-        pos = type.indexType.getStart(sourceFile)
+        return type.indexType.getStart(sourceFile)
       }
       else if (ts.isImportTypeNode(type)) {
-        pos = type.argument.getStart(sourceFile)
-      }
-      if (pos === undefined) {
-        return
-      }
-
-      const res = getDefinitionAndBoundSpan(fileName, pos)
-      if (res?.definitions?.length) {
-        for (const definition of res.definitions) {
-          definitions.add(definition)
-        }
-        skippedDefinitions.push(definition)
+        return type.argument.getStart(sourceFile)
       }
     }
   }
