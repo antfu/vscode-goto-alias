@@ -65,7 +65,7 @@ function getDefinitionAndBoundSpan(
       if (ts.isBindingElement(node)) {
         pos = proxyBindingElement(node, definition, sourceFile)
       }
-      if (ts.isPropertySignature(node) && node.type) {
+      else if (ts.isPropertySignature(node) && node.type) {
         pos = proxyTypeofImport(node.name, node.type, definition, sourceFile)
       }
       else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.type && !node.initializer) {
