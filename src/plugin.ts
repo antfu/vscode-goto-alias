@@ -60,10 +60,10 @@ function getDefinitionAndBoundSpan(
         proxyBindingElement(node, definition, sourceFile)
       }
       if (ts.isPropertySignature(node) && node.type) {
-        proxyIndexedAccess(node.name, node.type, definition, sourceFile)
+        proxyTypeofImport(node.name, node.type, definition, sourceFile)
       }
       else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.type && !node.initializer) {
-        proxyIndexedAccess(node.name, node.type, definition, sourceFile)
+        proxyTypeofImport(node.name, node.type, definition, sourceFile)
       }
       else {
         ts.forEachChild(node, child => visit(child, definition, sourceFile))
@@ -98,7 +98,7 @@ function getDefinitionAndBoundSpan(
       }
     }
 
-    function proxyIndexedAccess(
+    function proxyTypeofImport(
       name: ts.PropertyName,
       type: ts.TypeNode,
       definition: ts.DefinitionInfo,
@@ -112,11 +112,17 @@ function getDefinitionAndBoundSpan(
         return
       }
 
-      if (!ts.isIndexedAccessTypeNode(type)) {
+      let pos: number | undefined
+      if (ts.isIndexedAccessTypeNode(type)) {
+        pos = type.indexType.getStart(sourceFile)
+      }
+      else if (ts.isImportTypeNode(type)) {
+        pos = type.argument.getStart(sourceFile)
+      }
+      if (pos === undefined) {
         return
       }
 
-      const pos = type.indexType.getStart(sourceFile)
       const res = getDefinitionAndBoundSpan(fileName, pos)
       if (res?.definitions?.length) {
         for (const definition of res.definitions) {
