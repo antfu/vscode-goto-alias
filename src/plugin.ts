@@ -19,6 +19,8 @@ const plugin: ts.server.PluginModuleFactory = (module) => {
 
 export default plugin
 
+const DTS_REGEX = /\.d\.(?:c|m)ts$/
+
 function getDefinitionAndBoundSpan(
   ts: typeof import('typescript'),
   languageService: ts.LanguageService,
@@ -31,11 +33,13 @@ function getDefinitionAndBoundSpan(
     }
 
     const program = languageService.getProgram()!
-
     const definitions = new Set<ts.DefinitionInfo>(result.definitions)
     const skippedDefinitions: ts.DefinitionInfo[] = []
 
     for (const definition of result.definitions) {
+      if (!DTS_REGEX.test(definition.fileName)) {
+        continue
+      }
       const sourceFile = program.getSourceFile(definition.fileName)
       if (sourceFile) {
         visit(sourceFile, definition, sourceFile)
