@@ -19,7 +19,7 @@ const plugin: ts.server.PluginModuleFactory = (module) => {
 
 export default plugin
 
-const DTS_REGEX = /\.d\.(?:c|m)ts$/
+const DTS_REGEX = /\.d\.(?:c|m)?ts$/
 
 function getDefinitionAndBoundSpan(
   ts: typeof import('typescript'),
