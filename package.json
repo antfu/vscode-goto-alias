@@ -26,6 +26,7 @@
   "files": [
     "LICENSE",
     "dist",
+    "node_modules",
     "res"
   ],
   "engines": {
@@ -56,8 +57,8 @@
     "dev": "NODE_ENV=development tsdown --watch",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
-    "ext:publish": "vsce publish --no-dependencies",
-    "package": "vsce package --no-dependencies",
+    "ext:publish": "vsce publish",
+    "package": "vsce package",
     "typecheck": "tsc --noEmit",
     "release": "bumpp"
   },
