@@ -26,6 +26,7 @@
   "files": [
     "LICENSE",
     "dist",
+    "node_modules",
     "res"
   ],
   "engines": {
@@ -43,15 +44,21 @@
     "configuration": {
       "type": "object",
       "title": "Goto Alias"
-    }
+    },
+    "typescriptServerPlugins": [
+      {
+        "name": "goto-alias-typescript-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      }
+    ]
   },
   "scripts": {
-    "build": "NODE_ENV=production tsdown src/index.ts --external vscode",
-    "dev": "NODE_ENV=dev nr build --watch",
+    "build": "NODE_ENV=production tsdown",
+    "dev": "NODE_ENV=development tsdown --watch",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
-    "ext:publish": "vsce publish --no-dependencies",
-    "package": "vsce package --no-dependencies",
+    "ext:publish": "vsce publish",
+    "package": "vsce package",
     "typecheck": "tsc --noEmit",
     "release": "bumpp"
   },

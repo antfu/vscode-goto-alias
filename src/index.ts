@@ -1,5 +1,5 @@
-import type { Definition, DefinitionLink, ExtensionContext, Location, LocationLink, TextDocument } from 'vscode'
-import { commands, languages, Position, window, workspace } from 'vscode'
+import type { ExtensionContext } from 'vscode'
+import { window, workspace } from 'vscode'
 
 function showSettingsUpdateDialog(ext: ExtensionContext) {
   if (workspace.getConfiguration().get('editor.gotoLocation.multipleDefinitions') === 'goto')
@@ -26,68 +26,7 @@ function showSettingsUpdateDialog(ext: ExtensionContext) {
 }
 
 export function activate(ext: ExtensionContext) {
-  let lock: boolean = false
-
   showSettingsUpdateDialog(ext)
-
-  languages.registerDefinitionProvider([
-    'javascript',
-    'typescript',
-    'javascriptreact',
-    'typescriptreact',
-    'vue',
-    'markdown',
-  ], {
-    async provideDefinition(document: TextDocument, position: Position) {
-      // prevent infinite loop and reduce unnecessary calls
-      if (lock)
-        return null
-
-      lock = true
-      const definitions = await commands.executeCommand('vscode.executeDefinitionProvider', document.uri, position) as Definition | DefinitionLink[]
-      if (!Array.isArray(definitions))
-        return definitions
-
-      const modifiedDefinitions = []
-      for (const definition of definitions) {
-        if ('targetUri' in definition) {
-          const { originSelectionRange, targetUri } = definition
-          if (targetUri.fsPath.endsWith('.d.ts')) {
-            // get the content of the dts file without opening it
-            const dtsDocument = (await workspace.fs.readFile(targetUri)).toString()
-            const { targetRange } = definition
-            const regex = /\s*typeof import\(['"`]([^']*)['"`]\)\[['"`]([^']*)['"`]\]/
-            const line = dtsDocument.split('\n')[targetRange.start.line]
-            const match = line.match(regex)
-
-            if (!match) {
-              modifiedDefinitions.push(definition)
-              continue
-            }
-
-            const importNameStart = match.index! + match[0].length - 2
-            const dtsDefinitions = await commands.executeCommand('vscode.executeDefinitionProvider', targetUri, new Position(targetRange.start.line, importNameStart)) as DefinitionLink[]
-            if (dtsDefinitions.length) {
-              // unshift to keep this definition as primary
-              // when set `"editor.gotoLocation.multipleDefinitions": "goto"`, it will go to the right file
-              modifiedDefinitions.unshift(
-                ...dtsDefinitions.map(dtsDefinition => ({
-                  ...dtsDefinition,
-                  originSelectionRange,
-                })),
-              )
-            }
-          }
-        }
-        else {
-          modifiedDefinitions.push(definition)
-        }
-      }
-
-      lock = false
-      return modifiedDefinitions as Location[] | LocationLink[]
-    },
-  })
 }
 
 export function deactivate() {}
